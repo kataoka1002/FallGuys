@@ -13,6 +13,9 @@
     <Filter Include="Game\Block">
       <UniqueIdentifier>{a5ae334e-67fa-4b23-b8dd-729eeb3edd0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Character">
+      <UniqueIdentifier>{66117202-daa3-471e-917f-cb6090356678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -31,19 +34,10 @@
     <ClCompile Include="GrayBlockRender.cpp">
       <Filter>Game\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="WoodBlock.cpp">
@@ -58,8 +52,20 @@
     <ClCompile Include="YellowBlockRender.cpp">
       <Filter>Game\Block</Filter>
     </ClCompile>
-    <ClCompile Include="BlockRenderObserver.cpp">
+    <ClCompile Include="Character.cpp">
+      <Filter>Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
       <Filter>Game\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWalkState.cpp">
+      <Filter>Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>Game\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,16 +85,7 @@
     <ClInclude Include="GrayBlockRender.h">
       <Filter>Game\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="WoodBlock.h">
@@ -103,8 +100,23 @@
     <ClInclude Include="YellowBlockRender.h">
       <Filter>Game\Block</Filter>
     </ClInclude>
-    <ClInclude Include="BlockRenderObserver.h">
+    <ClInclude Include="Character.h">
+      <Filter>Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
       <Filter>Game\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlayerState.h">
+      <Filter>Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWalkState.h">
+      <Filter>Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>Game\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

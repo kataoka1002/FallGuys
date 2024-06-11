@@ -223,7 +223,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BlockRenderObserver.cpp" />
     <ClCompile Include="BrownBlock.cpp" />
     <ClCompile Include="BrownBlockRender.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -232,6 +231,8 @@
     <ClCompile Include="GrayBlockRender.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerWalkState.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -245,14 +246,16 @@
     <ClCompile Include="YellowBlockRender.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlockRenderObserver.h" />
     <ClInclude Include="BrownBlock.h" />
     <ClInclude Include="BrownBlockRender.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GrayBlock.h" />
     <ClInclude Include="GrayBlockRender.h" />
+    <ClInclude Include="IPlayerState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerWalkState.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "Stage.h"
+#include "Player.h"
 
 Game::~Game()
 {
@@ -14,8 +15,11 @@ bool Game::Start()
 	g_camera3D->SetPosition(0.0f, 815.0f, -220.0f);
 	g_camera3D->SetTarget(0.0f, 0.0f, -60.0f);
 
-	m_modelRender.Init("Assets/modelData/player/player.tkm");
+	//ステージの作成
 	m_stage = NewGO<Stage>(0, "stage");
+
+	//プレイヤーの作成
+	m_player = NewGO<Player>(0, "player");
 
 	return true;
 }
@@ -42,10 +46,9 @@ void Game::Update()
 	g_camera3D->SetPosition(m_camerapos);
 
 	// g_renderingEngine->DisableRaytracing();
-	m_modelRender.Update();
 }
 
 void Game::Render(RenderContext& rc)
 {
-	m_modelRender.Draw(rc);
+	
 }

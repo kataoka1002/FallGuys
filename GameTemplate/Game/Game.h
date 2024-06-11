@@ -22,8 +22,8 @@ public:
 
 private:
 	Stage* m_stage = nullptr;
+	Player* m_player = nullptr;
 
-	ModelRender m_modelRender;
 	Vector3 m_pos;
 
 	Vector3 m_camerapos = { 0.0f, 815.0f, -220.0f };
