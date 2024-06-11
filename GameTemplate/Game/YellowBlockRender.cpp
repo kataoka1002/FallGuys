@@ -2,6 +2,11 @@
 #include "YellowBlockRender.h"
 #include "Game.h"
 
+namespace
+{
+	int YELLOW_NUM = 1;
+}
+
 bool YellowBlockRender::Start()
 {
 	m_modelRender.Init(
@@ -13,10 +18,8 @@ bool YellowBlockRender::Start()
 		m_maxBlock
 	);
 
-	// 静的物理オブジェクトを作成。
-	m_phyStaticObject.CreateFromModel(m_modelRender.GetModel(), m_modelRender.GetWorldMatrix(0));
-
 	m_game = FindGO<Game>("game");
+	m_game->SetStaticObject(YELLOW_NUM);
 
 	return true;
 }

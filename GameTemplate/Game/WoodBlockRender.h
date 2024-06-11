@@ -42,6 +42,17 @@ public:
 		m_modelRender.RemoveInstance(instanceNo);
 	}
 
+	Model& GetModel()
+	{
+		return m_modelRender.GetModel();
+	}
+
+	const Matrix& GetWorldMatrix(int num)
+	{
+		return m_modelRender.GetWorldMatrix(num);
+	}
+
+
 private:
 	PhysicsStaticObject m_phyStaticObject;  // 静的物理オブジェクト
 	ModelRender			m_modelRender;		// モデルレンダラー。

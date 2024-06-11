@@ -30,6 +30,20 @@ void GrayBlock::Update()
 	);
 }
 
+void GrayBlock::SetStaticObject(int num)
+{
+	//更新処理
+	m_grayBlockRender->UpdateInstancingData(
+		m_instanceNo,
+		m_position,
+		m_rotation,
+		m_scale
+	);
+
+	// 静的物理オブジェクトを作成。
+	m_phyStaticObject.CreateFromModel(m_grayBlockRender->GetModel(), m_grayBlockRender->GetWorldMatrix(m_instanceNo));
+}
+
 void GrayBlock::Render(RenderContext& rc)
 {
 

@@ -30,6 +30,20 @@ void WoodBlock::Update()
 	);
 }
 
+void WoodBlock::SetStaticObject(int num)
+{
+	//更新処理
+	m_woodBlockRender->UpdateInstancingData(
+		m_instanceNo,
+		m_position,
+		m_rotation,
+		m_scale
+	);
+
+	// 静的物理オブジェクトを作成。
+	m_phyStaticObject.CreateFromModel(m_woodBlockRender->GetModel(), m_woodBlockRender->GetWorldMatrix(m_instanceNo));
+}
+
 void WoodBlock::Render(RenderContext& rc)
 {
 

@@ -2,6 +2,11 @@
 #include "WoodBlockRender.h"
 #include "Game.h"
 
+namespace
+{
+	int WOOD_NUM = 4;
+}
+
 bool WoodBlockRender::Start()
 {
 	m_modelRender.Init(
@@ -13,10 +18,8 @@ bool WoodBlockRender::Start()
 		m_maxBlock
 	);
 
-	// 静的物理オブジェクトを作成。
-	m_phyStaticObject.CreateFromModel(m_modelRender.GetModel(), m_modelRender.GetModel().GetWorldMatrix());
-
 	m_game = FindGO<Game>("game");
+	m_game->SetStaticObject(WOOD_NUM);
 
 	return true;
 }

@@ -11,6 +11,8 @@ public:
 	void Update();
 	void Render(RenderContext& rc);
 
+	void SetStaticObject(int num);
+
 	void SetTRS(Vector3 pos, Quaternion rot, Vector3 scale)
 	{
 		m_position = pos;
@@ -28,7 +30,7 @@ private:
 	Vector3					m_position;						// 座標。
 	Vector3					m_scale;						// 大きさ。
 	Quaternion				m_rotation;						// 回転。
-	ModelRender				m_modelRender;					// モデルレンダー。
-	YellowBlockRender*		m_yellowBlockRender = nullptr;	// グレーブロックレンダー。
+	YellowBlockRender*		m_yellowBlockRender = nullptr;	// 黄色ブロックレンダー。
 	Game*					m_game = nullptr;
+	PhysicsStaticObject		m_phyStaticObject;				// 静的物理オブジェクト
 };

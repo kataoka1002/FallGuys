@@ -2,6 +2,11 @@
 #include "BrownBlockRender.h"
 #include "Game.h"
 
+namespace
+{
+	int BROWN_NUM = 2;
+}
+
 bool BrownBlockRender::Start()
 {
 	m_modelRender.Init(
@@ -13,10 +18,8 @@ bool BrownBlockRender::Start()
 		m_maxBlock
 	);
 
-	// 静的物理オブジェクトを作成。
-	m_phyStaticObject.CreateFromModel(m_modelRender.GetModel(), m_modelRender.GetModel().GetWorldMatrix());
-
 	m_game = FindGO<Game>("game");
+	m_game->SetStaticObject(BROWN_NUM);
 
 	return true;
 }

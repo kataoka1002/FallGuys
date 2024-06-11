@@ -9,7 +9,7 @@ Game::~Game()
 
 bool Game::Start()
 {
-	PhysicsWorld::GetInstance()->EnableDrawDebugWireFrame();
+	//PhysicsWorld::GetInstance()->EnableDrawDebugWireFrame();
 
 	g_camera3D->SetPosition(0.0f, 815.0f, -220.0f);
 	g_camera3D->SetTarget(0.0f, 0.0f, -60.0f);
@@ -39,7 +39,7 @@ void Game::Update()
 		m_camerapos.y -= 1.0f;
 	}
 
-	//g_camera3D->SetPosition(m_camerapos);
+	g_camera3D->SetPosition(m_camerapos);
 
 	// g_renderingEngine->DisableRaytracing();
 	m_modelRender.Update();

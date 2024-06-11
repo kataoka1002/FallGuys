@@ -223,6 +223,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlockRenderObserver.cpp" />
     <ClCompile Include="BrownBlock.cpp" />
     <ClCompile Include="BrownBlockRender.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -244,6 +245,7 @@
     <ClCompile Include="YellowBlockRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlockRenderObserver.h" />
     <ClInclude Include="BrownBlock.h" />
     <ClInclude Include="BrownBlockRender.h" />
     <ClInclude Include="Character.h" />

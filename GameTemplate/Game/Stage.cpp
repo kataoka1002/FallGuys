@@ -162,6 +162,46 @@ void Stage::SetBlock(Vector3& pos, int& stageData)
 	}
 }
 
+void Stage::SetStaticObject(int& blockNum)
+{
+	if (blockNum == 1)
+	{
+		int num = 0;
+		for (auto block : m_yellowBlocks)
+		{
+			block->SetStaticObject(num);
+			num++;
+		}
+	}
+	else if (blockNum == 2)
+	{
+		int num = 0;
+		for (auto block : m_brownBlocks)
+		{
+			block->SetStaticObject(num);
+			num++;
+		}
+	}
+	else if (blockNum == 3)
+	{
+		int num = 0;
+		for (auto block : m_grayBlocks)
+		{
+			block->SetStaticObject(num);
+			num++;
+		}
+	}
+	else if (blockNum == 4)
+	{
+		int num = 0;
+		for (auto block : m_woodBlocks)
+		{
+			block->SetStaticObject(num);
+			num++;
+		}
+	}
+}
+
 void Stage::Render(RenderContext& rc)
 {
 	

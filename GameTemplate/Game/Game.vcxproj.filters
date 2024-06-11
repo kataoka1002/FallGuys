@@ -58,6 +58,9 @@
     <ClCompile Include="YellowBlockRender.cpp">
       <Filter>Game\Block</Filter>
     </ClCompile>
+    <ClCompile Include="BlockRenderObserver.cpp">
+      <Filter>Game\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -98,6 +101,9 @@
       <Filter>Game\Block</Filter>
     </ClInclude>
     <ClInclude Include="YellowBlockRender.h">
+      <Filter>Game\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockRenderObserver.h">
       <Filter>Game\Block</Filter>
     </ClInclude>
   </ItemGroup>

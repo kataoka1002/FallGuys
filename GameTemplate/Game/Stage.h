@@ -19,6 +19,8 @@ public:
 
 	void SetBlock(Vector3& pos, int& stageData);
 
+	void SetStaticObject(int& blockNum);
+
 private:
 	//グレーのブロック
 	std::vector<GrayBlock*> m_grayBlocks;

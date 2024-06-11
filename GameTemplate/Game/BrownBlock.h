@@ -11,6 +11,8 @@ public:
 	void Update();
 	void Render(RenderContext& rc);
 
+	void SetStaticObject(int num);
+
 	void SetTRS(Vector3 pos, Quaternion rot, Vector3 scale)
 	{
 		m_position = pos;
@@ -31,4 +33,5 @@ private:
 	ModelRender				m_modelRender;					// モデルレンダー。
 	BrownBlockRender*		m_brownBlockRender = nullptr;	// グレーブロックレンダー。
 	Game*					m_game = nullptr;
+	PhysicsStaticObject		m_phyStaticObject;				// 静的物理オブジェクト
 };

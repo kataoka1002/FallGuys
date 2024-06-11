@@ -21,6 +21,11 @@ bool YellowBlock::Start()
 
 void YellowBlock::Update()
 {
+	
+}
+
+void YellowBlock::SetStaticObject(int num)
+{
 	//更新処理
 	m_yellowBlockRender->UpdateInstancingData(
 		m_instanceNo,
@@ -28,6 +33,9 @@ void YellowBlock::Update()
 		m_rotation,
 		m_scale
 	);
+
+	// 静的物理オブジェクトを作成。
+	m_phyStaticObject.CreateFromModel(m_yellowBlockRender->GetModel(), m_yellowBlockRender->GetWorldMatrix(m_instanceNo));
 }
 
 void YellowBlock::Render(RenderContext& rc)
