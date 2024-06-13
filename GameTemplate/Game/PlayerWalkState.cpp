@@ -10,7 +10,7 @@ PlayerWalkState::~PlayerWalkState()
 void PlayerWalkState::Enter()
 {
 	// 再生するアニメーションを設定。
-	//m_player->SetAnimation(Player::enAnimClip_Walk, 0.2f);
+	m_player->SetAnimation(Player::enAnimClip_Walk, 0.2f);
 }
 
 IPlayerState* PlayerWalkState::StateChange()

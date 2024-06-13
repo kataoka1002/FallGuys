@@ -17,7 +17,11 @@ namespace
 
 Player::Player()
 {
-
+	//アニメーションの初期化
+	animationClips[enAnimClip_Idle].Load("Assets/animData/playerIdle.tka");
+	animationClips[enAnimClip_Idle].SetLoopFlag(true);
+	animationClips[enAnimClip_Walk].Load("Assets/animData/playerWalk.tka");
+	animationClips[enAnimClip_Walk].SetLoopFlag(true);
 }
 
 Player::~Player()
@@ -28,7 +32,7 @@ Player::~Player()
 void Player::Update()
 {
 	// アニメーションを再生する。
-	//PlayAnimation(m_currentAnimationClip);
+	m_model.PlayAnimation(m_currentAnimationClip, m_complementTime);
 
 	// ステートを変更するか
 	IPlayerState* playerState = m_playerState->StateChange();
@@ -51,8 +55,13 @@ void Player::Update()
 
 void Player::InitModel()
 {
+	//アニメーションイベント用の関数を設定する
+	m_model.AddAnimationEvent([&](const wchar_t* clipName, const wchar_t* eventName) {
+		OnAnimationEvent(clipName, eventName);
+	});
+
 	//モデルの初期化
-	m_model.Init("Assets/modelData/player/player.tkm");
+	m_model.Init("Assets/modelData/player/player.tkm", animationClips, enAnimClip_Num, enModelUpAxisZ);
 	m_model.SetPosition(m_position);
 	m_model.SetRotation(m_rotation);
 	m_model.SetScale(m_scale);
@@ -116,4 +125,9 @@ void Player::Turn()
 	//回転を設定する
 	m_rotation.SetRotationYFromDirectionXZ(m_rotSpeed);
 	m_model.SetRotation(m_rotation);
+}
+
+void Player::OnAnimationEvent(const wchar_t* clipName, const wchar_t* eventName)
+{
+
 }

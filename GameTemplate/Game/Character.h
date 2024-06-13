@@ -14,6 +14,7 @@ public:
 	virtual void InitModel() = 0;
 	virtual void Move() = 0;
 	virtual void Turn() = 0;
+	virtual void OnAnimationEvent(const wchar_t* clipName, const wchar_t* eventName) = 0;// アニメーションイベント用の関数
 
 protected:
 	ModelRender			m_model;						// モデル

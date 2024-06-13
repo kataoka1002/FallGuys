@@ -10,7 +10,7 @@ PlayerIdleState::~PlayerIdleState()
 void PlayerIdleState::Enter()
 {
 	// 再生するアニメーションを設定。
-	//m_player->SetAnimation(Player::enAnimClip_Idle, 0.2f);
+	m_player->SetAnimation(Player::enAnimClip_Idle, 0.2f);
 }
 
 IPlayerState* PlayerIdleState::StateChange()
