@@ -20,6 +20,11 @@ public:
 	void SetBlock(Vector3& pos, int& stageData);
 
 	void SetStaticObject(int& blockNum);
+	
+	const std::vector<Vector3>& GetBombPoint()
+	{
+		return m_bombPoint;
+	}
 
 private:
 	//グレーのブロック
@@ -77,5 +82,7 @@ private:
 		{2,4,4,4,4,4,4,4,4,4,4,4,4,4,2 },
 		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 },
 	};
+
+	std::vector<Vector3> m_bombPoint;
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+class BombInformation;
 
 class Character : public IGameObject
 {
@@ -16,6 +17,11 @@ public:
 	virtual void Turn() = 0;
 	virtual void OnAnimationEvent(const wchar_t* clipName, const wchar_t* eventName) = 0;// アニメーションイベント用の関数
 
+	const Vector3& GetPosition()
+	{
+		return m_position;
+	}
+
 protected:
 	ModelRender			m_model;						// モデル
 	Vector3				m_position = Vector3::Zero;		// 座標
@@ -27,5 +33,5 @@ protected:
 	Quaternion			m_rotation;						// クォータニオン
 	float				LStick_x = 0.0f;				// Lスティック入力量(横)
 	float				LStick_y = 0.0f;				// Lスティック入力量(縦)
-
+	BombInformation*	m_bombInfo = nullptr;			// 爆弾インターフェース
 };

@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "Character.h"
+#include "BombInformation.h"
 
 bool Character::Start()
 {
+	m_bombInfo = FindGO<BombInformation>("bombinformation");
+
 	//ƒ‚ƒfƒ‹‚Ì‰Šú‰»
 	InitModel();
 

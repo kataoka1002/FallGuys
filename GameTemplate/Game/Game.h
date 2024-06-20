@@ -5,6 +5,8 @@
 
 class Player;
 class Stage;
+class Bomb;
+class BombInformation;
 
 class Game : public IGameObject
 {
@@ -23,6 +25,7 @@ public:
 private:
 	Stage* m_stage = nullptr;
 	Player* m_player = nullptr;
+	BombInformation* m_bombInfo = nullptr;
 
 	Vector3 m_pos;
 

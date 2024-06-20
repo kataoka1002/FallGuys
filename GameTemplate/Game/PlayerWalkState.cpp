@@ -32,4 +32,7 @@ void PlayerWalkState::Update()
 
 	// ‰ñ“]ˆ—B
 	m_player->Turn();
+
+	//”š’e‚ÌÝ’u
+	m_player->PlantBomb();
 }

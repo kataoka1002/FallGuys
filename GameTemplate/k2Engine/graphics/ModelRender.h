@@ -196,6 +196,10 @@ namespace nsK2Engine {
 		{
 			SetScale({ x, y, z });
 		}
+		void SetScale(float xyz)
+		{
+			SetScale({ xyz,xyz,xyz });
+		}
 		/// <summary>
 		/// シャドウキャスターのフラグを設定する
 		/// </summary>

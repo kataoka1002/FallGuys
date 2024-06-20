@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "IPlayerState.h"
 #include "PlayerIdleState.h"
+#include "BombInformation.h"
 
 namespace
 {
@@ -55,6 +56,9 @@ void Player::Update()
 
 void Player::InitModel()
 {
+	//クラスを見つける
+	m_bombInfo = FindGO<BombInformation>("bombinformation");
+
 	//アニメーションイベント用の関数を設定する
 	m_model.AddAnimationEvent([&](const wchar_t* clipName, const wchar_t* eventName) {
 		OnAnimationEvent(clipName, eventName);
@@ -125,6 +129,16 @@ void Player::Turn()
 	//回転を設定する
 	m_rotation.SetRotationYFromDirectionXZ(m_rotSpeed);
 	m_model.SetRotation(m_rotation);
+}
+
+void Player::PlantBomb()
+{
+	if (g_pad[0]->IsTrigger(enButtonA))
+	{
+		//爆弾を設置する
+		m_bombInfo->PlantBomb(0);
+	}
+
 }
 
 void Player::OnAnimationEvent(const wchar_t* clipName, const wchar_t* eventName)

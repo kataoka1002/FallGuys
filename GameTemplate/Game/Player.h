@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
 class IPlayerState;
+class BombInformation;
 
 class Player : public Character
 {
@@ -22,6 +23,8 @@ public:
 	void Turn()		 override;
 	void OnAnimationEvent(const wchar_t* clipName, const wchar_t* eventName) override;// アニメーションイベント用の関数
 
+	void PlantBomb();
+
 
 	/// <summary>
 	/// 再生するアニメーションクリップを設定する。
@@ -36,6 +39,7 @@ public:
 
 private:
 	IPlayerState*		m_playerState = nullptr;
+	BombInformation*	m_bombInfo = nullptr;
 	AnimationClip		animationClips[enAnimClip_Num];				// アニメーションクリップ
 	EnAnimationClip		m_currentAnimationClip = enAnimClip_Idle;	// 現在設定されているアニメーションクリップ
 	float				m_complementTime = 0.0f;					// アニメーションの補完時間

@@ -28,5 +28,6 @@ IPlayerState* PlayerIdleState::StateChange()
 
 void PlayerIdleState::Update()
 {
-	
+	//”š’e‚ÌÝ’u
+	m_player->PlantBomb();
 }

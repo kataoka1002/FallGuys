@@ -160,6 +160,11 @@ void Stage::SetBlock(Vector3& pos, int& stageData)
 		m_maxYellowBlock++;
 		m_yellowBlocks.push_back(yellowBlock);
 	}
+	else if (stageData == 4)
+	{
+		//”š’e‚ğ’u‚¯‚éêŠ‚ğ•Û‘¶
+		m_bombPoint.push_back(pos);
+	}
 }
 
 void Stage::SetStaticObject(int& blockNum)

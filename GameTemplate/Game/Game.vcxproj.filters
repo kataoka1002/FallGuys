@@ -16,6 +16,9 @@
     <Filter Include="Game\Character">
       <UniqueIdentifier>{66117202-daa3-471e-917f-cb6090356678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Item">
+      <UniqueIdentifier>{13f75d0b-61a1-4110-aa8e-3b5a9fc47dbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -67,6 +70,13 @@
     <ClCompile Include="PlayerIdleState.cpp">
       <Filter>Game\Character</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BombInformation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -118,5 +128,12 @@
     <ClInclude Include="PlayerIdleState.h">
       <Filter>Game\Character</Filter>
     </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BombInformation.h" />
   </ItemGroup>
 </Project>
