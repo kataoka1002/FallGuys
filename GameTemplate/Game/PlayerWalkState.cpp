@@ -15,7 +15,7 @@ void PlayerWalkState::Enter()
 
 IPlayerState* PlayerWalkState::StateChange()
 {
-	if (g_pad[0]->GetLStickXF() == 0.000f || g_pad[0]->GetLStickYF() == 0.000f)
+	if (g_pad[m_player->GetPlayerNo()]->GetLStickXF() == 0.000f || g_pad[m_player->GetPlayerNo()]->GetLStickYF() == 0.000f)
 	{
 		// アイドルステートに遷移する
 		return new PlayerIdleState(m_player);

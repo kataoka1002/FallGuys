@@ -90,8 +90,8 @@ void Player::Move()
 	m_moveSpeed.z = 0.0f;
 
 	//左スティックの入力量を受け取る
-	LStick_x = g_pad[0]->GetLStickXF();
-	LStick_y = g_pad[0]->GetLStickYF();
+	LStick_x = g_pad[m_playerNo]->GetLStickXF();
+	LStick_y = g_pad[m_playerNo]->GetLStickYF();
 
 	//オブジェクト保持中かどうかで歩く速さを変える
 	float moveSpeed;
@@ -133,12 +133,11 @@ void Player::Turn()
 
 void Player::PlantBomb()
 {
-	if (g_pad[0]->IsTrigger(enButtonA))
+	if (g_pad[m_playerNo]->IsTrigger(enButtonA))
 	{
 		//爆弾を設置する
-		m_bombInfo->PlantBomb(0);
+		m_bombInfo->PlantBomb(m_playerNo);
 	}
-
 }
 
 void Player::OnAnimationEvent(const wchar_t* clipName, const wchar_t* eventName)

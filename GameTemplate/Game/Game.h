@@ -24,10 +24,10 @@ public:
 
 private:
 	Stage* m_stage = nullptr;
-	Player* m_player = nullptr;
+	Player* m_player0 = nullptr;
+	Player* m_player1 = nullptr;
 	BombInformation* m_bombInfo = nullptr;
-
-	Vector3 m_pos;
+	SkyCube* m_skyCube = nullptr;
 
 	Vector3 m_camerapos = { 0.0f, 815.0f, -220.0f };
 };

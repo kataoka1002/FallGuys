@@ -39,7 +39,7 @@ void Bomb::Update()
 	FuseTime();
 
 	//キャラクターコントローラーを使用して座標を更新
-	//m_position = m_charaCon.Execute(m_moveSpeed, g_gameTime->GetFrameDeltaTime());
+	//m_charaCon.SetRigidBodyPosition(m_position);
 	m_model.SetPosition(m_position);
 	m_model.SetScale(m_scale);
 	m_model.Update();

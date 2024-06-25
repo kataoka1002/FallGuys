@@ -17,7 +17,6 @@ BombInformation::~BombInformation()
 bool BombInformation::Start()
 {	
 	m_stage = FindGO<Stage>("stage");
-	m_player = FindGO<Player>("player");
 	
 	//爆弾を置ける場所の取得
 	m_bombPoint = m_stage->GetBombPoint();
@@ -64,7 +63,7 @@ void BombInformation::Update()
 void BombInformation::PlantBomb(int num)
 {
 	//プレイヤーのポジションを取得
-	Vector3 playerPos = m_player->GetPosition();
+	Vector3 playerPos = m_player[num]->GetPosition();
 
 	//一番近いポイントまでの距離
 	float shortestDistance = 10000.0f;
@@ -91,12 +90,36 @@ void BombInformation::PlantBomb(int num)
 		}
 	}
 
-	for (auto bomb : m_bombs1P)
+	if (num == 0)
+	{
+		//爆弾を設置する
+		SetBombAtPosition(m_bombs1P, plantingPosition);
+	}
+	else if (num == 1)
+	{
+		//爆弾を設置する
+		SetBombAtPosition(m_bombs2P, plantingPosition);
+	}
+	else if (num == 2)
+	{
+		//爆弾を設置する
+		SetBombAtPosition(m_bombs3P, plantingPosition);
+	}
+	else if (num == 3)
+	{
+		//爆弾を設置する
+		SetBombAtPosition(m_bombs4P, plantingPosition);
+	}
+}
+
+void BombInformation::SetBombAtPosition(std::vector<Bomb*>& bombList, Vector3& pos)
+{
+	for (auto bomb : bombList)
 	{
 		//設置するポイントに爆弾がすでに置かれていないかを確認する
-		if (plantingPosition.x == bomb->GetPosition().x &&
-			plantingPosition.y == bomb->GetPosition().y &&
-			plantingPosition.z == bomb->GetPosition().z)
+		if (pos.x == bomb->GetPosition().x &&
+			pos.y == bomb->GetPosition().y &&
+			pos.z == bomb->GetPosition().z)
 		{
 			break;
 		}
@@ -105,7 +128,7 @@ void BombInformation::PlantBomb(int num)
 		if (bomb->GetIsSetBomb() == false)
 		{
 			//爆弾のポジションを更新
-			bomb->SetBombPosition(plantingPosition);
+			bomb->SetBombPosition(pos);
 
 			//セット完了
 			bomb->SetBomb();

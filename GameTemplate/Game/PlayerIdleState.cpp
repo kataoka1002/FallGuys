@@ -16,7 +16,7 @@ void PlayerIdleState::Enter()
 IPlayerState* PlayerIdleState::StateChange()
 {
 	//スティックの入力量によってステートを変更
-	if (g_pad[0]->GetLStickXF() != 0.000f || g_pad[0]->GetLStickYF() != 0.000f)
+	if (g_pad[m_player->GetPlayerNo()]->GetLStickXF() != 0.000f || g_pad[m_player->GetPlayerNo()]->GetLStickYF() != 0.000f)
 	{
 		// 歩きステートに遷移する
 		return new PlayerWalkState(m_player);

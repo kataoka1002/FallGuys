@@ -6,7 +6,10 @@
 
 Game::~Game()
 {
-	
+	DeleteGO(m_stage);
+	DeleteGO(m_player0);
+	DeleteGO(m_player1);
+	DeleteGO(m_bombInfo);
 }
 
 bool Game::Start()
@@ -20,10 +23,30 @@ bool Game::Start()
 	m_stage = NewGO<Stage>(0, "stage");
 
 	//プレイヤーの作成
-	m_player = NewGO<Player>(0, "player");
+	m_player0 = NewGO<Player>(0, "player");
+	m_player0->SetPlayerNo(0);
+	m_player0->SetPosition(Vector3{ 0.0f,0.0f,-180.0f });
+
+	//プレイヤーの作成
+	m_player1 = NewGO<Player>(0, "player");
+	m_player1->SetPlayerNo(1);
+	m_player1->SetPosition(Vector3{ 0.0f,0.0f,180.0f });
 
 	//爆弾インターフェースの作成
 	m_bombInfo = NewGO<BombInformation>(0, "bombinformation");
+	m_bombInfo->SetPlayerPtr(m_player0, m_player1);
+
+	//スカイキューブの作成
+	m_skyCube = NewGO<SkyCube>(0, "skycube");
+	m_skyCube->SetLuminance(1.0f);
+	m_skyCube->SetScale(250.0f);
+	m_skyCube->SetType((EnSkyCubeType)enSkyCubeType_Day);
+
+	// 環境光の設定
+	g_renderingEngine->SetAmbient(Vector3{ 2.5f,2.5f,2.5f });
+
+	//ディレクションライトの設定
+	g_renderingEngine->SetDirectionLight(0, Vector3{ 0.0f,-1.0f,0.0f }, Vector3{ 3.0f,3.0f,3.0f });
 
 	return true;
 }

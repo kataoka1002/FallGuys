@@ -25,6 +25,20 @@ public:
 
 	void PlantBomb();
 
+	void SetPlayerNo(const int no)
+	{
+		m_playerNo = no;
+	}
+
+	const int GetPlayerNo()
+	{
+		return m_playerNo;
+	}
+
+	void SetPosition(const Vector3& pos)
+	{
+		m_position = pos;
+	}
 
 	/// <summary>
 	/// 再生するアニメーションクリップを設定する。
@@ -43,4 +57,5 @@ private:
 	AnimationClip		animationClips[enAnimClip_Num];				// アニメーションクリップ
 	EnAnimationClip		m_currentAnimationClip = enAnimClip_Idle;	// 現在設定されているアニメーションクリップ
 	float				m_complementTime = 0.0f;					// アニメーションの補完時間
+	int					m_playerNo = 0;								// プレイヤーのナンバー
 };
