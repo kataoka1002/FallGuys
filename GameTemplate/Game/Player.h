@@ -40,6 +40,16 @@ public:
 		m_position = pos;
 	}
 
+	void DeadPlayer()
+	{
+		m_isPlayerDead = true;
+	}
+
+	const float GetExplosionPow()
+	{
+		return m_bombExplosionPow;
+	}
+
 	/// <summary>
 	/// 再生するアニメーションクリップを設定する。
 	/// </summary>
@@ -57,5 +67,7 @@ private:
 	AnimationClip		animationClips[enAnimClip_Num];				// アニメーションクリップ
 	EnAnimationClip		m_currentAnimationClip = enAnimClip_Idle;	// 現在設定されているアニメーションクリップ
 	float				m_complementTime = 0.0f;					// アニメーションの補完時間
+	int 				m_bombExplosionPow = 0;						// 爆破威力
 	int					m_playerNo = 0;								// プレイヤーのナンバー
+	bool				m_isPlayerDead = false;						// プレイヤーが死んだかどうか
 };

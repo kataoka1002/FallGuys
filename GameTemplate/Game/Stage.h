@@ -26,6 +26,11 @@ public:
 		return m_bombPoint;
 	}
 
+	const std::vector<Vector3>& GetWallBlockPositionList()
+	{
+		return m_wallBlockPositionList;
+	}
+
 private:
 	//グレーのブロック
 	std::vector<GrayBlock*> m_grayBlocks;
@@ -84,5 +89,6 @@ private:
 	};
 
 	std::vector<Vector3> m_bombPoint;
+	std::vector<Vector3> m_wallBlockPositionList;
 };
 

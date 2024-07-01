@@ -14,6 +14,9 @@ namespace
 
 	//ƒLƒƒƒ‰ƒRƒ“‚Ì”¼Œa
 	const float CHARACON_RADIUS = 10.0f;
+
+	//”š”jˆĞ—Í
+	const int BOMB_EXPLOSION_POWER = 2;
 }
 
 Player::Player()
@@ -23,6 +26,9 @@ Player::Player()
 	animationClips[enAnimClip_Idle].SetLoopFlag(true);
 	animationClips[enAnimClip_Walk].Load("Assets/animData/playerWalk.tka");
 	animationClips[enAnimClip_Walk].SetLoopFlag(true);
+
+	//”š”j—Í‚Ìİ’è
+	m_bombExplosionPow = BOMB_EXPLOSION_POWER;
 }
 
 Player::~Player()

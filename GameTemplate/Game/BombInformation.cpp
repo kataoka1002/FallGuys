@@ -21,30 +21,47 @@ bool BombInformation::Start()
 	//爆弾を置ける場所の取得
 	m_bombPoint = m_stage->GetBombPoint();
 
+	//壁になるブロックの座標の取得
+	m_wallBlockPositionList = m_stage->GetWallBlockPositionList();
+
 	//爆弾を20個生成
 	int bombNum = 0;
 	for (int i = 0; i < 20; i++)
 	{
 		m_bomb = NewGO<Bomb>(0, "bomb");
 		m_bomb->SetBombNumber(bombNum);
+		m_bomb->SetPlayerPtr(m_player[0], m_player[1]);
+		m_bomb->SetBombInfomation(this);
 
 		if (bombNum >= 0 && bombNum < 5)
 		{
+			//親プレイヤーの設定
+			m_bomb->SetParentPlayer(m_player[0]);
+
 			//リストに追加
 			m_bombs1P.emplace_back(m_bomb);
 		}
 		else if (bombNum >= 5 && bombNum < 10)
 		{
+			//親プレイヤーの設定
+			m_bomb->SetParentPlayer(m_player[1]);
+
 			//リストに追加
 			m_bombs2P.emplace_back(m_bomb);
 		}
 		else if (bombNum >= 10 && bombNum < 15)
 		{
+			//親プレイヤーの設定
+			m_bomb->SetParentPlayer(m_player[2]);
+
 			//リストに追加
 			m_bombs3P.emplace_back(m_bomb);
 		}
 		else if (bombNum >= 15 && bombNum < 20)
 		{
+			//親プレイヤーの設定
+			m_bomb->SetParentPlayer(m_player[3]);
+
 			//リストに追加
 			m_bombs4P.emplace_back(m_bomb);
 		}

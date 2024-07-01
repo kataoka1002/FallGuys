@@ -40,6 +40,11 @@ public:
 		m_player[3] = player3;
 	}
 
+	const std::vector<Vector3>& GetWallBlockPositionList()
+	{
+		return m_wallBlockPositionList;
+	}
+
 private:
 	Bomb* m_bomb = nullptr;
 	Stage* m_stage = nullptr;
@@ -49,5 +54,6 @@ private:
 	std::vector<Bomb*> m_bombs3P;
 	std::vector<Bomb*> m_bombs4P;
 	std::vector<Vector3> m_bombPoint;
+	std::vector<Vector3> m_wallBlockPositionList;
 	std::vector<Vector3> m_bombPlantedPosition;
 };

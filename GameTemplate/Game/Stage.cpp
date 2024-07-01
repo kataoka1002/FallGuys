@@ -126,6 +126,9 @@ void Stage::SetBlock(Vector3& pos, int& stageData)
 		//ブロックの数を数える。
 		m_maxGrayBlock++;
 		m_grayBlocks.push_back(grayBlock);
+
+		//壁になるブロックの座標を保存
+		m_wallBlockPositionList.emplace_back(pos);
 	}
 	else if (stageData == 1)
 	{
@@ -137,6 +140,9 @@ void Stage::SetBlock(Vector3& pos, int& stageData)
 		//ブロックの数を数える。
 		m_maxBrownBlock++;
 		m_brownBlocks.push_back(brownBlock);
+
+		//壁になるブロックの座標を保存
+		m_wallBlockPositionList.emplace_back(pos);
 	}
 	else if (stageData == 2)
 	{
@@ -148,6 +154,9 @@ void Stage::SetBlock(Vector3& pos, int& stageData)
 		//ブロックの数を数える。
 		m_maxWoodBlock++;
 		m_woodBlocks.push_back(woodBlock);
+
+		//壁になるブロックの座標を保存
+		m_wallBlockPositionList.emplace_back(pos);
 	}
 	else if (stageData == 3)
 	{
@@ -159,6 +168,9 @@ void Stage::SetBlock(Vector3& pos, int& stageData)
 		//ブロックの数を数える。
 		m_maxYellowBlock++;
 		m_yellowBlocks.push_back(yellowBlock);
+
+		//壁になるブロックの座標を保存
+		m_wallBlockPositionList.emplace_back(pos);
 	}
 	else if (stageData == 4)
 	{

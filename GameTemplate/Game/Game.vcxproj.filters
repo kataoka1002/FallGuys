@@ -76,7 +76,12 @@
     <ClCompile Include="ItemBase.cpp">
       <Filter>Game\Item</Filter>
     </ClCompile>
-    <ClCompile Include="BombInformation.cpp" />
+    <ClCompile Include="BombInformation.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -134,6 +139,11 @@
     <ClInclude Include="ItemBase.h">
       <Filter>Game\Item</Filter>
     </ClInclude>
-    <ClInclude Include="BombInformation.h" />
+    <ClInclude Include="BombInformation.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
