@@ -6,9 +6,6 @@
 
 namespace
 {
-	//歩くスピード
-	const float WALK_SPEED = 100.0f;
-
 	//キャラコンの高さ
 	const float CHARACON_HEIGHT = 50.0f;
 
@@ -16,7 +13,10 @@ namespace
 	const float CHARACON_RADIUS = 10.0f;
 
 	//爆破威力
-	const int BOMB_EXPLOSION_POWER = 2;
+	const int BOMB_EXPLOSION_POWER = 1;
+
+	//歩くスピード
+	const float WALK_SPEED = 100.0f;
 }
 
 Player::Player()

@@ -111,6 +111,9 @@ void Bomb::FuseTime()
 		//爆発
 		Explosion();
 
+		//設置している爆弾の数を減少させる
+		m_bombInfo->DecreaseBombCount(m_bombNumber);
+
 		//爆弾のリセット
 		ResetBomb();
 	}

@@ -23,7 +23,7 @@ public:
 	/// </summary>
 	/// <param name="bombList">爆弾のリスト</param>
 	/// <param name="pos">設置場所</param>
-	void SetBombAtPosition(std::vector<Bomb*>& bombList, Vector3& pos);
+	void SetBombAtPosition(std::vector<Bomb*>& bombList, Vector3& pos, int& playerNum);
 
 	/// <summary>
 	/// プレイヤーのポインタを設定する
@@ -45,6 +45,8 @@ public:
 		return m_wallBlockPositionList;
 	}
 
+	void DecreaseBombCount(int& bombNum);
+
 private:
 	Bomb* m_bomb = nullptr;
 	Stage* m_stage = nullptr;
@@ -56,4 +58,12 @@ private:
 	std::vector<Vector3> m_bombPoint;
 	std::vector<Vector3> m_wallBlockPositionList;
 	std::vector<Vector3> m_bombPlantedPosition;
+	int m_maxBombCount1P = 0;
+	int m_maxBombCount2P = 0;
+	int m_maxBombCount3P = 0;
+	int m_maxBombCount4P = 0;
+	int m_plantBombCount1P = 0;
+	int m_plantBombCount2P = 0;
+	int m_plantBombCount3P = 0;
+	int m_plantBombCount4P = 0;
 };
