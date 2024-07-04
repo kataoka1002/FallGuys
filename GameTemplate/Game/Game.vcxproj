@@ -224,11 +224,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="BombCountUp.cpp" />
     <ClCompile Include="BombInformation.cpp" />
     <ClCompile Include="BrownBlock.cpp" />
     <ClCompile Include="BrownBlockRender.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="FirePowerUp.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GrayBlock.cpp" />
     <ClCompile Include="GrayBlockRender.cpp" />
@@ -244,6 +245,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="WalkSpeedUp.cpp" />
     <ClCompile Include="WoodBlock.cpp" />
     <ClCompile Include="WoodBlockRender.cpp" />
     <ClCompile Include="YellowBlock.cpp" />
@@ -251,11 +253,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombCountUp.h" />
     <ClInclude Include="BombInformation.h" />
     <ClInclude Include="BrownBlock.h" />
     <ClInclude Include="BrownBlockRender.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="Fire.h" />
+    <ClInclude Include="FirePowerUp.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GrayBlock.h" />
     <ClInclude Include="GrayBlockRender.h" />
@@ -267,6 +270,7 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="WalkSpeedUp.h" />
     <ClInclude Include="WoodBlock.h" />
     <ClInclude Include="WoodBlockRender.h" />
     <ClInclude Include="YellowBlock.h" />

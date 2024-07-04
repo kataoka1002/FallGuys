@@ -117,26 +117,11 @@ void BombInformation::PlantBomb(int num)
 		}
 	}
 
-	if (num == 0)
-	{
-		//爆弾を設置する
-		SetBombAtPosition(m_bombs1P, plantingPosition, num);
-	}
-	else if (num == 1)
-	{
-		//爆弾を設置する
-		SetBombAtPosition(m_bombs2P, plantingPosition, num);
-	}
-	else if (num == 2)
-	{
-		//爆弾を設置する
-		SetBombAtPosition(m_bombs3P, plantingPosition, num);
-	}
-	else if (num == 3)
-	{
-		//爆弾を設置する
-		SetBombAtPosition(m_bombs4P, plantingPosition, num);
-	}
+	//爆弾のリストを管理する配列
+	std::vector<Bomb*> bombs[4] = { m_bombs1P ,m_bombs2P ,m_bombs3P ,m_bombs4P };
+
+	//爆弾の設置
+	SetBombAtPosition(bombs[num], plantingPosition, num);
 }
 
 void BombInformation::SetBombAtPosition(std::vector<Bomb*>& bombList, Vector3& pos, int& playerNum)
@@ -184,23 +169,25 @@ void BombInformation::SetBombAtPosition(std::vector<Bomb*>& bombList, Vector3& p
 
 void BombInformation::DecreaseBombCount(int& bombNum)
 {
-	//設置している爆弾の数を減少させる
-	if (bombNum >= 0 && bombNum < 5)
+	// 各プレイヤーの爆弾カウントを配列で管理
+	int* bombCounts[] = { &m_plantBombCount1P, &m_plantBombCount2P, &m_plantBombCount3P, &m_plantBombCount4P };
+
+	// 対応するプレイヤーの爆弾カウントを減少させる
+	if (bombNum >= 0 && bombNum < 20)
 	{
-		m_plantBombCount1P--;
+		int index = bombNum / 5;
+		(*bombCounts[index])--;
 	}
-	else if (bombNum >= 5 && bombNum < 10)
-	{
-		m_plantBombCount2P--;
-	}
-	else if (bombNum >= 10 && bombNum < 15)
-	{
-		m_plantBombCount3P--;
-	}
-	else if (bombNum >= 15 && bombNum < 20)
-	{
-		m_plantBombCount4P--;
-	}
+}
+
+void BombInformation::LevelUpBombCount(int& playerNum)
+{
+	//置ける爆弾の最大値の配列
+	int* maxBombCount[4] = { &m_maxBombCount1P ,&m_maxBombCount2P ,&m_maxBombCount3P ,&m_maxBombCount4P };
+
+	//置ける数を増やす(最大5個)
+	(*maxBombCount[playerNum])++;
+	(*maxBombCount[playerNum]) = min((*maxBombCount[playerNum]), 5);
 }
 
 void BombInformation::Render(RenderContext& rc)

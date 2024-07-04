@@ -45,7 +45,16 @@ public:
 		return m_wallBlockPositionList;
 	}
 
+	/// <summary>
+	/// İ’u‚µ‚Ä‚¢‚é”š’e‚Ì”‚ğŒ¸­‚³‚¹‚é
+	/// </summary>
+	/// <param name="bombNum"></param>
 	void DecreaseBombCount(int& bombNum);
+
+	/// <summary>
+	/// ’u‚¯‚é”š’e‚ÌŒÂ”‚ğ‘‚â‚·(Å‘å5ŒÂ)
+	/// </summary>
+	void LevelUpBombCount(int& playerNum);
 
 private:
 	Bomb* m_bomb = nullptr;

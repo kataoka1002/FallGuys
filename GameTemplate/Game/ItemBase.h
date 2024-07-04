@@ -26,4 +26,3 @@ protected:
 	Quaternion			m_rotation;						// クォータニオン
 	CharacterController m_charaCon;						// キャラクターコントローラー
 };
-

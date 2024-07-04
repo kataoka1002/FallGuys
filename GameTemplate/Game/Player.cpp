@@ -17,6 +17,9 @@ namespace
 
 	//歩くスピード
 	const float WALK_SPEED = 100.0f;
+
+	//歩くスピードレベル1の値
+	const float WALK_SPEED_LEVEL1 = 1.0f;
 }
 
 Player::Player()
@@ -29,6 +32,9 @@ Player::Player()
 
 	//爆破力の設定
 	m_bombExplosionPow = BOMB_EXPLOSION_POWER;
+
+	//歩くスピードレベルの初期化
+	m_walkSpeed = WALK_SPEED_LEVEL1;
 }
 
 Player::~Player()
@@ -51,6 +57,19 @@ void Player::Update()
 		delete m_playerState;
 		m_playerState = playerState;
 		m_playerState->Enter();
+	}
+
+	if (g_pad[0]->IsTrigger(enButtonY))
+	{
+		LevelUpExplosionPow();
+	}
+	if (g_pad[0]->IsTrigger(enButtonX))
+	{
+		LevelUpWalkSpeed();
+	}
+	if (g_pad[0]->IsTrigger(enButtonB))
+	{
+		LevelUpBombCount(m_playerNo);
 	}
 
 	// 各ステートの更新処理を実行。
@@ -101,7 +120,7 @@ void Player::Move()
 
 	//オブジェクト保持中かどうかで歩く速さを変える
 	float moveSpeed;
-	moveSpeed = WALK_SPEED;
+	moveSpeed = WALK_SPEED * m_walkSpeed;
 
 	//XZ成分の移動速度をクリア
 	m_moveSpeed.x = LStick_x * moveSpeed;		//右方向への移動速度を加算

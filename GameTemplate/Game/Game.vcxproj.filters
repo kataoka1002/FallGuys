@@ -79,7 +79,13 @@
     <ClCompile Include="BombInformation.cpp">
       <Filter>Game\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Fire.cpp">
+    <ClCompile Include="BombCountUp.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="FirePowerUp.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkSpeedUp.cpp">
       <Filter>Game\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -142,7 +148,13 @@
     <ClInclude Include="BombInformation.h">
       <Filter>Game\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Fire.h">
+    <ClInclude Include="BombCountUp.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="FirePowerUp.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkSpeedUp.h">
       <Filter>Game\Item</Filter>
     </ClInclude>
   </ItemGroup>

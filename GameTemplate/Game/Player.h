@@ -1,7 +1,7 @@
 #pragma once
 #include "Character.h"
+#include "BombInformation.h"
 class IPlayerState;
-class BombInformation;
 
 class Player : public Character
 {
@@ -51,6 +51,32 @@ public:
 	}
 
 	/// <summary>
+	/// 歩くスピードを上げる(最大2.0)
+	/// </summary>
+	void LevelUpWalkSpeed()
+	{		
+		m_walkSpeed += 0.2f;
+		m_walkSpeed = min(m_walkSpeed, 2.0f);
+	}
+
+	/// <summary>
+	/// 火力を上げる(最大5マス)
+	/// </summary>
+	void LevelUpExplosionPow()
+	{
+		m_bombExplosionPow++;
+		m_bombExplosionPow = min(m_bombExplosionPow, 5);
+	}
+
+	/// <summary>
+	/// 置ける爆弾の個数を増やす(最大5個)
+	/// </summary>
+	void LevelUpBombCount(int& playerNum)
+	{		
+		m_bombInfo->LevelUpBombCount(playerNum);
+	}
+
+	/// <summary>
 	/// 再生するアニメーションクリップを設定する。
 	/// </summary>
 	/// <param name="enAnimationClip">アニメーションクリップ</param>
@@ -68,6 +94,8 @@ private:
 	EnAnimationClip		m_currentAnimationClip = enAnimClip_Idle;	// 現在設定されているアニメーションクリップ
 	float				m_complementTime = 0.0f;					// アニメーションの補完時間
 	int 				m_bombExplosionPow = 0;						// 爆破威力
+	float				m_walkSpeed = 0.0f;							// 歩く速さ
+	int					m_bombPlantCount = 0;						// 置ける爆弾の個数
 	int					m_playerNo = 0;								// プレイヤーのナンバー
 	bool				m_isPlayerDead = false;						// プレイヤーが死んだかどうか
 };
