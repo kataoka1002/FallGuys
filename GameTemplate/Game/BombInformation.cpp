@@ -21,7 +21,29 @@ BombInformation::BombInformation()
 
 BombInformation::~BombInformation()
 {
+	for (auto bomb : m_bombs1P)
+	{
+		DeleteGO(bomb);
+	}
+	m_bombs1P.clear();
 
+	for (auto bomb : m_bombs2P)
+	{
+		DeleteGO(bomb);
+	}
+	m_bombs2P.clear();
+
+	for (auto bomb : m_bombs3P)
+	{
+		DeleteGO(bomb);
+	}
+	m_bombs3P.clear();
+
+	for (auto bomb : m_bombs4P)
+	{
+		DeleteGO(bomb);
+	}
+	m_bombs4P.clear();
 }
 
 bool BombInformation::Start()
@@ -34,6 +56,10 @@ bool BombInformation::Start()
 	//壁になるブロックの座標の取得
 	m_wallBlockPositionList = m_stage->GetWallBlockPositionList();
 
+	//爆弾のリストを管理する配列
+	//std::vector<std::unique_ptr<Bomb>> bombs[4] = { m_bombs1P ,m_bombs2P ,m_bombs3P ,m_bombs4P };
+	std::vector<Bomb*> bombs[4] = { m_bombs1P ,m_bombs2P ,m_bombs3P ,m_bombs4P };
+
 	//爆弾を20個生成
 	int bombNum = 0;
 	for (int i = 0; i < 20; i++)
@@ -43,41 +69,31 @@ bool BombInformation::Start()
 		m_bomb->SetPlayerPtr(m_player[0], m_player[1]);
 		m_bomb->SetBombInfomation(this);
 
-		if (bombNum >= 0 && bombNum < 5)
+		//爆弾をそれぞれのリストに追加していく
+		if (bombNum >= 0 && bombNum < 20)
 		{
 			//親プレイヤーの設定
-			m_bomb->SetParentPlayer(m_player[0]);
+			int index = bombNum / 5;
+			m_bomb->SetParentPlayer(m_player[index]);
 
 			//リストに追加
-			m_bombs1P.emplace_back(m_bomb);
-		}
-		else if (bombNum >= 5 && bombNum < 10)
-		{
-			//親プレイヤーの設定
-			m_bomb->SetParentPlayer(m_player[1]);
-
-			//リストに追加
-			m_bombs2P.emplace_back(m_bomb);
-		}
-		else if (bombNum >= 10 && bombNum < 15)
-		{
-			//親プレイヤーの設定
-			m_bomb->SetParentPlayer(m_player[2]);
-
-			//リストに追加
-			m_bombs3P.emplace_back(m_bomb);
-		}
-		else if (bombNum >= 15 && bombNum < 20)
-		{
-			//親プレイヤーの設定
-			m_bomb->SetParentPlayer(m_player[3]);
-
-			//リストに追加
-			m_bombs4P.emplace_back(m_bomb);
+			bombs[index].emplace_back(m_bomb);
 		}
 
 		bombNum++;
 	}
+
+	//リストの情報の更新
+	m_bombs1P = bombs[0];
+	m_bombs2P = bombs[1];
+	m_bombs3P = bombs[2];
+	m_bombs4P = bombs[3];
+
+	//仮の配列の中身を空にする
+	bombs[0].clear();
+	bombs[1].clear();
+	bombs[2].clear();
+	bombs[3].clear();
 
 	return true;
 }

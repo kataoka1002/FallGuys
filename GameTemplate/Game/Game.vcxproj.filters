@@ -88,6 +88,9 @@
     <ClCompile Include="WalkSpeedUp.cpp">
       <Filter>Game\Item</Filter>
     </ClCompile>
+    <ClCompile Include="LevelUpItemInformation.cpp">
+      <Filter>Game\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -155,6 +158,9 @@
       <Filter>Game\Item</Filter>
     </ClInclude>
     <ClInclude Include="WalkSpeedUp.h">
+      <Filter>Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelUpItemInformation.h">
       <Filter>Game\Item</Filter>
     </ClInclude>
   </ItemGroup>

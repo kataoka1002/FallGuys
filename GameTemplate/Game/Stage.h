@@ -21,12 +21,12 @@ public:
 
 	void SetStaticObject(int& blockNum);
 	
-	const std::vector<Vector3>& GetBombPoint()
+	const std::vector<Vector3>& GetBombPoint() const
 	{
 		return m_bombPoint;
 	}
 
-	const std::vector<Vector3>& GetWallBlockPositionList()
+	const std::vector<Vector3>& GetWallBlockPositionList() const
 	{
 		return m_wallBlockPositionList;
 	}

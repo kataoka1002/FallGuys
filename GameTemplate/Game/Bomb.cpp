@@ -65,11 +65,11 @@ void Bomb::InitModel()
 	m_model.Update();
 
 	//キャラクターコントローラーを初期化
-	m_charaCon.Init(
-		CHARACON_RADIUS,	//半径
-		CHARACON_HEIGHT,	//高さ
-		m_position			//座標
-	);
+	//m_charaCon.Init(
+	//	CHARACON_RADIUS,	//半径
+	//	CHARACON_HEIGHT,	//高さ
+	//	m_position			//座標
+	//);
 }
 
 void Bomb::SwellingModel()

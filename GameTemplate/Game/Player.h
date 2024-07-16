@@ -71,9 +71,9 @@ public:
 	/// <summary>
 	/// 置ける爆弾の個数を増やす(最大5個)
 	/// </summary>
-	void LevelUpBombCount(int& playerNum)
+	void LevelUpBombCount()
 	{		
-		m_bombInfo->LevelUpBombCount(playerNum);
+		m_bombInfo->LevelUpBombCount(m_playerNo);
 	}
 
 	/// <summary>
@@ -87,6 +87,11 @@ public:
 		m_complementTime = complementTime;
 	}
 
+	CharacterController& GetCharaCon()
+	{
+		return m_charaCon;
+	}
+
 private:
 	IPlayerState*		m_playerState = nullptr;
 	BombInformation*	m_bombInfo = nullptr;
@@ -95,7 +100,6 @@ private:
 	float				m_complementTime = 0.0f;					// アニメーションの補完時間
 	int 				m_bombExplosionPow = 0;						// 爆破威力
 	float				m_walkSpeed = 0.0f;							// 歩く速さ
-	int					m_bombPlantCount = 0;						// 置ける爆弾の個数
 	int					m_playerNo = 0;								// プレイヤーのナンバー
 	bool				m_isPlayerDead = false;						// プレイヤーが死んだかどうか
 };

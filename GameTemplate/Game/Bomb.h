@@ -76,5 +76,4 @@ private:
 	float				m_timer = 0.0f;					//タイマー
 	int					m_bombNumber = 0;				//爆弾の番号
 	bool				m_isSetBomb = false;			//爆弾を設置しているかどうか
-
 };

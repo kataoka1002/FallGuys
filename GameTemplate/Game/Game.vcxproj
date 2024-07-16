@@ -234,6 +234,7 @@
     <ClCompile Include="GrayBlock.cpp" />
     <ClCompile Include="GrayBlockRender.cpp" />
     <ClCompile Include="ItemBase.cpp" />
+    <ClCompile Include="LevelUpItemInformation.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="GrayBlockRender.h" />
     <ClInclude Include="IPlayerState.h" />
     <ClInclude Include="ItemBase.h" />
+    <ClInclude Include="LevelUpItemInformation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerIdleState.h" />
     <ClInclude Include="PlayerWalkState.h" />

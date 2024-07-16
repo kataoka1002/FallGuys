@@ -3,13 +3,19 @@
 #include "Stage.h"
 #include "Player.h"
 #include "BombInformation.h"
+#include "LevelUpItemInformation.h"
 
 Game::~Game()
 {
 	DeleteGO(m_stage);
-	DeleteGO(m_player0);
-	DeleteGO(m_player1);
 	DeleteGO(m_bombInfo);
+	DeleteGO(m_levelUpItemInfo);
+
+	for (auto player : m_playerList)
+	{
+		DeleteGO(player);
+	}
+	m_playerList.clear();
 }
 
 bool Game::Start()
@@ -26,11 +32,13 @@ bool Game::Start()
 	m_player0 = NewGO<Player>(0, "player");
 	m_player0->SetPlayerNo(0);
 	m_player0->SetPosition(Vector3{ 0.0f,0.0f,-180.0f });
+	m_playerList.emplace_back(m_player0);
 
 	//プレイヤーの作成
 	m_player1 = NewGO<Player>(0, "player");
 	m_player1->SetPlayerNo(1);
 	m_player1->SetPosition(Vector3{ 0.0f,0.0f,180.0f });
+	m_playerList.emplace_back(m_player1);
 
 	//爆弾インターフェースの作成
 	m_bombInfo = NewGO<BombInformation>(0, "bombinformation");
@@ -41,6 +49,9 @@ bool Game::Start()
 	m_skyCube->SetLuminance(1.0f);
 	m_skyCube->SetScale(250.0f);
 	m_skyCube->SetType((EnSkyCubeType)enSkyCubeType_Day);
+
+	//レベルアップアイテムインターフェースの作成
+	m_levelUpItemInfo = NewGO<LevelUpItemInformation>(0, "levelupiteminformation");
 
 	// 環境光の設定
 	g_renderingEngine->SetAmbient(Vector3{ 2.5f,2.5f,2.5f });

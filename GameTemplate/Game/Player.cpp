@@ -69,7 +69,7 @@ void Player::Update()
 	}
 	if (g_pad[0]->IsTrigger(enButtonB))
 	{
-		LevelUpBombCount(m_playerNo);
+		LevelUpBombCount();
 	}
 
 	// 各ステートの更新処理を実行。
