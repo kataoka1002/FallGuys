@@ -8,6 +8,15 @@ class Bomb;
 class BombInformation;
 class LevelUpItemInformation;
 
+/// <summary>
+/// エフェクトの名前
+/// </summary>
+enum EffectName
+{
+	enEffectName_BombExplosion,
+	enEffectName_Num,
+};
+
 class Game : public IGameObject
 {
 public:

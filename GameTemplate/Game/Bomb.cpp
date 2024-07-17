@@ -2,6 +2,7 @@
 #include "Bomb.h"
 #include "Player.h"
 #include "BombInformation.h"
+#include "Game.h"
 
 namespace
 {
@@ -165,6 +166,15 @@ void Bomb::Explosion()
 		if (isExplosionSpreadingDown == true)
 		{
 			explosionPosList.emplace_back(downExplosionPos);
+		}
+
+		for (auto pos : explosionPosList)
+		{
+			//エフェクトの再生
+			EffectEmitter* m_effect = NewGO<EffectEmitter>(0);
+			m_effect->Init(enEffectName_BombExplosion);
+			m_effect->SetPosition(pos);
+			m_effect->Play();
 		}
 
 		//壁になるブロックにぶつかったかどうか

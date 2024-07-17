@@ -29,6 +29,9 @@ Game::~Game()
 
 bool Game::Start()
 {
+	//エフェクトの設定
+	EffectEngine::GetInstance()->ResistEffect(enEffectName_BombExplosion, u"Assets/effect/bombExplosion.efk");
+
 	//PhysicsWorld::GetInstance()->EnableDrawDebugWireFrame();
 
 	//カメラの設定
