@@ -5,6 +5,15 @@
 #include "BombInformation.h"
 #include "LevelUpItemInformation.h"
 
+namespace
+{
+	//プレイヤーのスタート位置
+	const Vector3 PLAYER_POSITION_1 = { -360.0f,0.0f,300.0f };
+	const Vector3 PLAYER_POSITION_2 = { 360.0f,0.0f,300.0f };
+	const Vector3 PLAYER_POSITION_3 = { -360.0f,0.0f,-300.0f };
+	const Vector3 PLAYER_POSITION_4 = { 360.0f,0.0f,-300.0f };
+}
+
 Game::~Game()
 {
 	DeleteGO(m_stage);
@@ -22,6 +31,7 @@ bool Game::Start()
 {
 	//PhysicsWorld::GetInstance()->EnableDrawDebugWireFrame();
 
+	//カメラの設定
 	g_camera3D->SetPosition(0.0f, 815.0f, -220.0f);
 	g_camera3D->SetTarget(0.0f, 0.0f, -60.0f);
 
@@ -31,13 +41,13 @@ bool Game::Start()
 	//プレイヤーの作成
 	m_player0 = NewGO<Player>(0, "player");
 	m_player0->SetPlayerNo(0);
-	m_player0->SetPosition(Vector3{ 0.0f,0.0f,-180.0f });
+	m_player0->SetPosition(PLAYER_POSITION_1);
 	m_playerList.emplace_back(m_player0);
 
 	//プレイヤーの作成
 	m_player1 = NewGO<Player>(0, "player");
 	m_player1->SetPlayerNo(1);
-	m_player1->SetPosition(Vector3{ 0.0f,0.0f,180.0f });
+	m_player1->SetPosition(PLAYER_POSITION_2);
 	m_playerList.emplace_back(m_player1);
 
 	//爆弾インターフェースの作成

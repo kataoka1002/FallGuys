@@ -58,6 +58,25 @@ Stage::~Stage()
 
 bool Stage::Start()
 {
+	//乱数の種の変更
+	std::srand(std::time(0));
+
+	//ブロックが置かれない位置は10箇所
+	for (int i = 0; i < 10; i++)
+	{
+		int row = 0, column = 0;
+
+		//ランダムに生成した場所に壊せないブロックがあるまたは何も置かれてない場合は繰り返す
+		do{
+			//ブロックが置かれない場所をランダムに設定
+			row = (rand() % 11) + 1;
+			column = (rand() % 13) + 1;
+		} while (m_stageData2[row][column] == 3 || (m_stageData2[row][column] == 4));
+
+		//何も置かない
+		m_stageData2[row][column] = 4;
+	}
+
 	//ブロックの配置
 	for (int y = 0; y < STAGE_SIZE_Y; ++y)
 	{
