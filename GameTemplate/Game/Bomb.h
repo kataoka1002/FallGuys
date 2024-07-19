@@ -2,6 +2,7 @@
 #include "ItemBase.h"
 class BombInformation;
 class Player;
+class BrownBlock;
 
 class Bomb : public ItemBase
 {
@@ -16,6 +17,7 @@ public:
 	void FuseTime();
 	void ResetBomb();
 	void Explosion();
+	void CheckForBrownBlock(BrownBlock* brownBlock, Vector3& exPos);
 
 	void SetBombPosition(Vector3& pos)
 	{

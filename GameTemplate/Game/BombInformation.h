@@ -2,6 +2,7 @@
 class Bomb;
 class Stage;
 class Player;
+class BrownBlock;
 
 class BombInformation : public IGameObject
 {
@@ -40,9 +41,19 @@ public:
 		m_player[3] = player3;
 	}
 
-	const std::vector<Vector3>& GetWallBlockPositionList()
+	const std::vector<Vector3>& GetWallBlockPositionList() const
 	{
 		return m_wallBlockPositionList;
+	}
+
+	const std::vector<Vector3>& GetCavityPositionList() const
+	{
+		return m_cavityPositionList;
+	}
+
+	const std::vector<BrownBlock*> GetBrownBlockList() const
+	{
+		return m_brownBlocks;
 	}
 
 	/// <summary>
@@ -56,6 +67,26 @@ public:
 	/// </summary>
 	void LevelUpBombCount(int& playerNum);
 
+	/// <summary>
+	/// ãÛì¥ÇÃç¿ïWÇí«â¡Ç∑ÇÈ
+	/// </summary>
+	/// <param name="pos"></param>
+	/// <returns></returns>
+	const void AddCavityPosition(Vector3& pos)
+	{
+		m_cavityPositionList.emplace_back(pos);
+	}
+
+	/// <summary>
+	/// îöíeÇíuÇØÇÈç¿ïWÇí«â¡Ç∑ÇÈ
+	/// </summary>
+	/// <param name="pos"></param>
+	/// <returns></returns>
+	const void AddBombPoint(Vector3& pos)
+	{
+		m_bombPoint.emplace_back(pos);
+	}
+
 private:
 	Bomb* m_bomb = nullptr;
 	Stage* m_stage = nullptr;
@@ -67,6 +98,8 @@ private:
 	std::vector<Vector3> m_bombPoint;
 	std::vector<Vector3> m_wallBlockPositionList;
 	std::vector<Vector3> m_bombPlantedPosition;
+	std::vector<Vector3> m_cavityPositionList;
+	std::vector<BrownBlock*> m_brownBlocks;
 	int m_maxBombCount1P = 0;
 	int m_maxBombCount2P = 0;
 	int m_maxBombCount3P = 0;

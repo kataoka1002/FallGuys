@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "BombInformation.h"
 #include "Game.h"
+#include "BrownBlock.h"
 
 namespace
 {
@@ -140,6 +141,9 @@ void Bomb::Explosion()
 	bool isExplosionSpreadingUp = true;
 	bool isExplosionSpreadingDown = true;
 
+	//爆破座標を管理するリスト
+	std::vector<Vector3> explosionPosList;
+
 	//ステータス分の爆破距離を伸ばす
 	for (int i = 0; i <= m_parentPlayer->GetExplosionPow(); i++)
 	{
@@ -149,37 +153,10 @@ void Bomb::Explosion()
 		Vector3 upExplosionPos = { m_position.x, m_position.y, m_position.z + (BOMB_EXPLOSION_ORIGINAL * i) };
 		Vector3 downExplosionPos = { m_position.x, m_position.y, m_position.z - (BOMB_EXPLOSION_ORIGINAL * i) };
 
-		//リストに追加
-		std::vector<Vector3> explosionPosList;
-		if (isExplosionSpreadingRight == true)
-		{
-			explosionPosList.emplace_back(rightExplosionPos);
-		}
-		if (isExplosionSpreadingLeft == true)
-		{
-			explosionPosList.emplace_back(leftExplosionPos);
-		}
-		if (isExplosionSpreadingUp == true)
-		{
-			explosionPosList.emplace_back(upExplosionPos);
-		}
-		if (isExplosionSpreadingDown == true)
-		{
-			explosionPosList.emplace_back(downExplosionPos);
-		}
-
-		for (auto pos : explosionPosList)
-		{
-			//エフェクトの再生
-			EffectEmitter* m_effect = NewGO<EffectEmitter>(0);
-			m_effect->Init(enEffectName_BombExplosion);
-			m_effect->SetPosition(pos);
-			m_effect->Play();
-		}
-
 		//壁になるブロックにぶつかったかどうか
 		for (auto wallPos : m_bombInfo->GetWallBlockPositionList())
 		{
+			//ぶつかったらこれ以上広がらないように変数を変更する
 			if (wallPos.x == rightExplosionPos.x && wallPos.y == rightExplosionPos.y && wallPos.z == rightExplosionPos.z)
 			{
 				isExplosionSpreadingRight = false;
@@ -198,29 +175,118 @@ void Bomb::Explosion()
 			}
 		}
 
-		//プレイヤー4人分チェック
-		for (int j = 0; j < 4; j++)
+		//ブロックが消えて出来た空洞があるかをチェック
+		for (auto cavityPos : m_bombInfo->GetCavityPositionList())
 		{
-			//プレイヤーがいないなら終わる
-			if (m_player[j] == nullptr)
+			//あったら爆発が広がるように変数を変更する
+			if (cavityPos.x == rightExplosionPos.x && cavityPos.y == rightExplosionPos.y && cavityPos.z == rightExplosionPos.z)
 			{
-				break;
+				isExplosionSpreadingRight = true;
 			}
-
-			//爆風とプレイヤーの位置関係の処理
-			for (auto exPos : explosionPosList)
+			if (cavityPos.x == leftExplosionPos.x && cavityPos.y == leftExplosionPos.y && cavityPos.z == leftExplosionPos.z)
 			{
-				//爆風からプレイヤーまでの距離を求める
-				Vector3 toPlayer = m_player[j]->GetPosition() - exPos;
-				float toPlayerDis = toPlayer.Length();
-
-				//一定距離以内なら
-				if (toPlayerDis <= 30.0f)
-				{
-					//プレイヤーは死亡する
-					m_player[j]->DeadPlayer();
-				}
+				isExplosionSpreadingLeft = true;
+			}
+			if (cavityPos.x == upExplosionPos.x && cavityPos.y == upExplosionPos.y && cavityPos.z == upExplosionPos.z)
+			{
+				isExplosionSpreadingUp = true;
+			}
+			if (cavityPos.x == downExplosionPos.x && cavityPos.y == downExplosionPos.y && cavityPos.z == downExplosionPos.z)
+			{
+				isExplosionSpreadingDown = true;
 			}
 		}
+
+		//壊せるブロックがあるかをチェックする
+		for (auto brown : m_bombInfo->GetBrownBlockList())
+		{
+			CheckForBrownBlock(brown, rightExplosionPos);
+			CheckForBrownBlock(brown, leftExplosionPos);
+			CheckForBrownBlock(brown, upExplosionPos);
+			CheckForBrownBlock(brown, downExplosionPos);
+		}
+
+		//爆風を発生させる場所をリストに追加
+		if (i == 0)
+		{
+			explosionPosList.emplace_back(m_position);
+		}
+		else
+		{
+			//爆風を広げれるなら座標を追加
+			if (isExplosionSpreadingRight == true)
+			{
+				explosionPosList.emplace_back(rightExplosionPos);
+			}
+			if (isExplosionSpreadingLeft == true)
+			{
+				explosionPosList.emplace_back(leftExplosionPos);
+			}
+			if (isExplosionSpreadingUp == true)
+			{
+				explosionPosList.emplace_back(upExplosionPos);
+			}
+			if (isExplosionSpreadingDown == true)
+			{
+				explosionPosList.emplace_back(downExplosionPos);
+			}
+		}
+	}
+
+	for (auto pos : explosionPosList)
+	{
+		//エフェクトの再生
+		EffectEmitter* m_effect = NewGO<EffectEmitter>(0);
+		m_effect->Init(enEffectName_BombExplosion);
+		m_effect->SetPosition(pos);
+		m_effect->Play();
+	}
+
+	//プレイヤー4人分チェック
+	for (int j = 0; j < 4; j++)
+	{
+		//プレイヤーがいないなら終わる
+		if (m_player[j] == nullptr)
+		{
+			break;
+		}
+
+		//爆風とプレイヤーの位置関係の処理
+		for (auto exPos : explosionPosList)
+		{
+			//爆風からプレイヤーまでの距離を求める
+			Vector3 toPlayer = m_player[j]->GetPosition() - exPos;
+			float toPlayerDis = toPlayer.Length();
+
+			//一定距離以内なら
+			if (toPlayerDis <= 30.0f)
+			{
+				//プレイヤーは死亡する
+				m_player[j]->DeadPlayer();
+			}
+		}
+	}
+}
+
+void Bomb::CheckForBrownBlock(BrownBlock* brownBlock, Vector3& exPos)
+{
+	//壊せるブロックがあったら
+	if (brownBlock->GetPosition().x == exPos.x && brownBlock->GetPosition().y == exPos.y && brownBlock->GetPosition().z == exPos.z)
+	{
+		//元々壁判定だった座標を空洞に変更
+		for (auto wallPos : m_bombInfo->GetWallBlockPositionList())
+		{
+			if (wallPos.x == brownBlock->GetPosition().x && wallPos.y == brownBlock->GetPosition().y && wallPos.z == brownBlock->GetPosition().z)
+			{
+				//空洞リストに追加
+				m_bombInfo->AddCavityPosition(wallPos);
+
+				//爆弾設置可能リストに追加
+				m_bombInfo->AddBombPoint(wallPos);
+			}
+		}
+
+		//ブロックの削除
+		DeleteGO(brownBlock);
 	}
 }

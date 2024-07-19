@@ -162,6 +162,9 @@ void Stage::SetBlock(Vector3& pos, int& stageData)
 
 		//壁になるブロックの座標を保存
 		m_wallBlockPositionList.emplace_back(pos);
+
+		//壊せるブロックの座標を保持
+		m_brownBlockPositionList.emplace_back(pos);
 	}
 	else if (stageData == 2)
 	{

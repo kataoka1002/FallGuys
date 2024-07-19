@@ -25,6 +25,11 @@ public:
 		m_instanceNo = num;
 	}
 
+	const Vector3& GetPosition() const
+	{
+		return m_position;
+	}
+
 private:
 	int						m_instanceNo = 0;				// インスタンス番号。
 	Vector3					m_position;						// 座標。

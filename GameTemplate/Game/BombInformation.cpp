@@ -56,6 +56,8 @@ bool BombInformation::Start()
 	//壁になるブロックの座標の取得
 	m_wallBlockPositionList = m_stage->GetWallBlockPositionList();
 
+	m_brownBlocks = m_stage->GetBrownBlockList();
+
 	//爆弾のリストを管理する配列
 	//std::vector<std::unique_ptr<Bomb>> bombs[4] = { m_bombs1P ,m_bombs2P ,m_bombs3P ,m_bombs4P };
 	std::vector<Bomb*> bombs[4] = { m_bombs1P ,m_bombs2P ,m_bombs3P ,m_bombs4P };
