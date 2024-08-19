@@ -3,6 +3,7 @@
 #include "Bomb.h"
 #include "Stage.h"
 #include "Player.h"
+#include "LevelUpItemInformation.h"
 
 namespace
 {
@@ -49,6 +50,8 @@ BombInformation::~BombInformation()
 bool BombInformation::Start()
 {	
 	m_stage = FindGO<Stage>("stage");
+
+	m_levelUpItemInfo = FindGO<LevelUpItemInformation>("levelupiteminformation");
 	
 	//爆弾を置ける場所の取得
 	m_bombPoint = m_stage->GetBombPoint();
@@ -56,6 +59,7 @@ bool BombInformation::Start()
 	//壁になるブロックの座標の取得
 	m_wallBlockPositionList = m_stage->GetWallBlockPositionList();
 
+	//茶色ブロックのリストを取得
 	m_brownBlocks = m_stage->GetBrownBlockList();
 
 	//爆弾のリストを管理する配列
@@ -206,6 +210,12 @@ void BombInformation::LevelUpBombCount(int& playerNum)
 	//置ける数を増やす(最大5個)
 	(*maxBombCount[playerNum])++;
 	(*maxBombCount[playerNum]) = min((*maxBombCount[playerNum]), 5);
+}
+
+void BombInformation::SetLevelUpItem(Vector3& pos)
+{
+	//アイテムの設置
+	m_levelUpItemInfo->SetLevelUpItem(pos);
 }
 
 void BombInformation::Render(RenderContext& rc)

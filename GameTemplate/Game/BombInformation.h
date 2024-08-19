@@ -3,6 +3,7 @@ class Bomb;
 class Stage;
 class Player;
 class BrownBlock;
+class LevelUpItemInformation;
 
 class BombInformation : public IGameObject
 {
@@ -12,6 +13,12 @@ public:
 	bool Start();
 	void Update();
 	void Render(RenderContext& rc);
+
+	/// <summary>
+	/// レベルアップアイテムの設置をする
+	/// </summary>
+	/// <param name="pos"></param>
+	void SetLevelUpItem(Vector3& pos);
 
 	/// <summary>
 	/// 爆弾を設置する場所を決める
@@ -91,6 +98,7 @@ private:
 	Bomb* m_bomb = nullptr;
 	Stage* m_stage = nullptr;
 	Player* m_player[4] = { nullptr,nullptr,nullptr,nullptr };
+	LevelUpItemInformation* m_levelUpItemInfo = nullptr;
 	std::vector<Bomb*> m_bombs1P;
 	std::vector<Bomb*> m_bombs2P;
 	std::vector<Bomb*> m_bombs3P;

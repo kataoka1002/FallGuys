@@ -12,6 +12,8 @@ public:
 	bool Start();
 	void Update();
 	void Render(RenderContext& rc);
+
+	void SetLevelUpItem(Vector3& pos);
 private:
 	std::vector<FirePowerUp*> m_firePowerUpList;
 	std::vector<WalkSpeedUp*> m_walkSpeedUpList;

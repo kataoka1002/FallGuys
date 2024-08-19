@@ -33,6 +33,9 @@ LevelUpItemInformation::~LevelUpItemInformation()
 
 bool LevelUpItemInformation::Start()
 {
+	//乱数の種の変更
+	std::srand(std::time(0));
+
 	//ステージを見つける
 	m_stage = FindGO<Stage>("stage");
 
@@ -65,30 +68,62 @@ bool LevelUpItemInformation::Start()
 
 void LevelUpItemInformation::Update()
 {
-	if (g_pad[0]->IsTrigger(enButtonLB1))
+	
+}
+
+void LevelUpItemInformation::SetLevelUpItem(Vector3& pos)
+{
+	if (rand() % 3 == 0)
 	{
-		for (auto fire : m_firePowerUpList)
+		//出てくるアイテムはランダム
+		int ran = rand() % 3;
+
+		if (ran == 0)
 		{
-			if (fire->GetIsTaken() == false)
+			for (auto fire : m_firePowerUpList)
 			{
-				fire->SetPosition(Vector3{ 0.0f,0.0f,0.0f });
-				break;
+				//まだセットされてないなら
+				if (fire->GetIsSet() == false)
+				{
+					//座標を設定
+					fire->SetPosition(pos);
+
+					//セット済みにする
+					fire->SetIsSet();
+					break;
+				}
 			}
 		}
-		for (auto fire : m_bombCountUpList)
+		else if (ran == 1)
 		{
-			if (fire->GetIsTaken() == false)
+			for (auto bombItem : m_bombCountUpList)
 			{
-				fire->SetPosition(Vector3{ 120.0f,0.0f,0.0f });
-				break;
+				//まだセットされてないなら
+				if (bombItem->GetIsSet() == false)
+				{
+					//座標を設定
+					bombItem->SetPosition(pos);
+
+					//セット済みにする
+					bombItem->SetIsSet();
+					break;
+				}
 			}
 		}
-		for (auto fire : m_walkSpeedUpList)
+		else if (ran == 2)
 		{
-			if (fire->GetIsTaken() == false)
+			for (auto walkSpeedItem : m_walkSpeedUpList)
 			{
-				fire->SetPosition(Vector3{ -120.0f,0.0f,0.0f });
-				break;
+				//まだセットされてないなら
+				if (walkSpeedItem->GetIsSet() == false)
+				{
+					//座標を設定
+					walkSpeedItem->SetPosition(pos);
+
+					//セット済みにする
+					walkSpeedItem->SetIsSet();
+					break;
+				}
 			}
 		}
 	}
