@@ -141,6 +141,12 @@ void Bomb::Explosion()
 	bool isExplosionSpreadingUp = true;
 	bool isExplosionSpreadingDown = true;
 
+	//ブロックを壊したかどうか
+	bool isPreventRight = false;
+	bool isPreventLeft = false;
+	bool isPreventUp = false;
+	bool isPreventDown = false;
+
 	//爆破座標を管理するリスト
 	std::vector<Vector3> explosionPosList;
 
@@ -160,18 +166,22 @@ void Bomb::Explosion()
 			if (wallPos.x == rightExplosionPos.x && wallPos.y == rightExplosionPos.y && wallPos.z == rightExplosionPos.z)
 			{
 				isExplosionSpreadingRight = false;
+				isPreventRight = true;
 			}
 			if (wallPos.x == leftExplosionPos.x && wallPos.y == leftExplosionPos.y && wallPos.z == leftExplosionPos.z)
 			{
 				isExplosionSpreadingLeft = false;
+				isPreventLeft = true;
 			}
 			if (wallPos.x == upExplosionPos.x && wallPos.y == upExplosionPos.y && wallPos.z == upExplosionPos.z)
 			{
 				isExplosionSpreadingUp = false;
+				isPreventUp = true;
 			}
 			if (wallPos.x == downExplosionPos.x && wallPos.y == downExplosionPos.y && wallPos.z == downExplosionPos.z)
 			{
 				isExplosionSpreadingDown = false;
+				isPreventDown = true;
 			}
 		}
 
@@ -179,19 +189,19 @@ void Bomb::Explosion()
 		for (auto cavityPos : m_bombInfo->GetCavityPositionList())
 		{
 			//あったら爆発が広がるように変数を変更する
-			if (cavityPos.x == rightExplosionPos.x && cavityPos.y == rightExplosionPos.y && cavityPos.z == rightExplosionPos.z)
+			if (cavityPos.x == rightExplosionPos.x && cavityPos.y == rightExplosionPos.y && cavityPos.z == rightExplosionPos.z && isPreventRight == false)
 			{
 				isExplosionSpreadingRight = true;
 			}
-			if (cavityPos.x == leftExplosionPos.x && cavityPos.y == leftExplosionPos.y && cavityPos.z == leftExplosionPos.z)
+			if (cavityPos.x == leftExplosionPos.x && cavityPos.y == leftExplosionPos.y && cavityPos.z == leftExplosionPos.z && isPreventLeft == false)
 			{
 				isExplosionSpreadingLeft = true;
 			}
-			if (cavityPos.x == upExplosionPos.x && cavityPos.y == upExplosionPos.y && cavityPos.z == upExplosionPos.z)
+			if (cavityPos.x == upExplosionPos.x && cavityPos.y == upExplosionPos.y && cavityPos.z == upExplosionPos.z && isPreventUp == false)
 			{
 				isExplosionSpreadingUp = true;
 			}
-			if (cavityPos.x == downExplosionPos.x && cavityPos.y == downExplosionPos.y && cavityPos.z == downExplosionPos.z)
+			if (cavityPos.x == downExplosionPos.x && cavityPos.y == downExplosionPos.y && cavityPos.z == downExplosionPos.z && isPreventDown == false)
 			{
 				isExplosionSpreadingDown = true;
 			}
@@ -283,10 +293,13 @@ void Bomb::CheckForBrownBlock(BrownBlock* brownBlock, Vector3& exPos)
 
 				//爆弾設置可能リストに追加
 				m_bombInfo->AddBombPoint(wallPos);
+
+				//レベルアップアイテムの設置
+				m_bombInfo->SetLevelUpItem(wallPos);
+				
+				//ブロックの削除
+				DeleteGO(brownBlock);
 			}
 		}
-
-		//ブロックの削除
-		DeleteGO(brownBlock);
 	}
 }
