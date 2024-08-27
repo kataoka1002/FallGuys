@@ -135,17 +135,29 @@ void Bomb::ResetBomb()
 
 void Bomb::Explosion()
 {
-	//爆発がこれ以上広がるかどうか
-	bool isExplosionSpreadingRight = true;
-	bool isExplosionSpreadingLeft = true;
-	bool isExplosionSpreadingUp = true;
-	bool isExplosionSpreadingDown = true;
+	//壁ブロックにぶつかったかどうか
+	bool isHitWallBlockRight = false;
+	bool isHitWallBlockLeft = false;
+	bool isHitWallBlockUp = false;
+	bool isHitWallBlockDown = false;
 
-	//ブロックを壊したかどうか
-	bool isPreventRight = false;
-	bool isPreventLeft = false;
-	bool isPreventUp = false;
-	bool isPreventDown = false;
+	//茶色ブロックを壊したかどうか
+	bool isRightBlockBreak = false;
+	bool isLeftBlockBreak = false;
+	bool isUpBlockBreak = false;
+	bool isDownBlockBreak = false;
+
+	//茶色ブロックにぶつかったかどうか
+	bool isHitBrownBlockRight = false;
+	bool isHitBrownBlockLeft = false;
+	bool isHitBrownBlockUp = false;
+	bool isHitBrownBlockDown = false;
+
+	//爆発の拡大を止めるかどうか
+	bool isStopExplosionRight = false;
+	bool isStopExplosionLeft = false;
+	bool isStopExplosionUp = false;
+	bool isStopExplosionDown = false;
 
 	//爆破座標を管理するリスト
 	std::vector<Vector3> explosionPosList;
@@ -159,29 +171,31 @@ void Bomb::Explosion()
 		Vector3 upExplosionPos = { m_position.x, m_position.y, m_position.z + (BOMB_EXPLOSION_ORIGINAL * i) };
 		Vector3 downExplosionPos = { m_position.x, m_position.y, m_position.z - (BOMB_EXPLOSION_ORIGINAL * i) };
 
-		//壁になるブロックにぶつかったかどうか
+		//空洞座標にぶつかったかどうか
+		bool isHitCavityPosRight = false;
+		bool isHitCavityPosLeft = false;
+		bool isHitCavityPosUp = false;
+		bool isHitCavityPosDown = false;
+
+		//壁になるブロック(黄色ブロック、フレームのブロック)にぶつかったかどうか
 		for (auto wallPos : m_bombInfo->GetWallBlockPositionList())
 		{
 			//ぶつかったらこれ以上広がらないように変数を変更する
 			if (wallPos.x == rightExplosionPos.x && wallPos.y == rightExplosionPos.y && wallPos.z == rightExplosionPos.z)
 			{
-				isExplosionSpreadingRight = false;
-				isPreventRight = true;
+				isHitWallBlockRight = true;
 			}
 			if (wallPos.x == leftExplosionPos.x && wallPos.y == leftExplosionPos.y && wallPos.z == leftExplosionPos.z)
 			{
-				isExplosionSpreadingLeft = false;
-				isPreventLeft = true;
+				isHitWallBlockLeft = true;
 			}
 			if (wallPos.x == upExplosionPos.x && wallPos.y == upExplosionPos.y && wallPos.z == upExplosionPos.z)
 			{
-				isExplosionSpreadingUp = false;
-				isPreventUp = true;
+				isHitWallBlockUp = true;
 			}
 			if (wallPos.x == downExplosionPos.x && wallPos.y == downExplosionPos.y && wallPos.z == downExplosionPos.z)
 			{
-				isExplosionSpreadingDown = false;
-				isPreventDown = true;
+				isHitWallBlockDown = true;
 			}
 		}
 
@@ -189,31 +203,68 @@ void Bomb::Explosion()
 		for (auto cavityPos : m_bombInfo->GetCavityPositionList())
 		{
 			//あったら爆発が広がるように変数を変更する
-			if (cavityPos.x == rightExplosionPos.x && cavityPos.y == rightExplosionPos.y && cavityPos.z == rightExplosionPos.z && isPreventRight == false)
+			if (cavityPos.x == rightExplosionPos.x && cavityPos.y == rightExplosionPos.y && cavityPos.z == rightExplosionPos.z)
 			{
-				isExplosionSpreadingRight = true;
+				isHitCavityPosRight = true;
 			}
-			if (cavityPos.x == leftExplosionPos.x && cavityPos.y == leftExplosionPos.y && cavityPos.z == leftExplosionPos.z && isPreventLeft == false)
+			if (cavityPos.x == leftExplosionPos.x && cavityPos.y == leftExplosionPos.y && cavityPos.z == leftExplosionPos.z)
 			{
-				isExplosionSpreadingLeft = true;
+				isHitCavityPosLeft = true;
 			}
-			if (cavityPos.x == upExplosionPos.x && cavityPos.y == upExplosionPos.y && cavityPos.z == upExplosionPos.z && isPreventUp == false)
+			if (cavityPos.x == upExplosionPos.x && cavityPos.y == upExplosionPos.y && cavityPos.z == upExplosionPos.z)
 			{
-				isExplosionSpreadingUp = true;
+				isHitCavityPosUp = true;
 			}
-			if (cavityPos.x == downExplosionPos.x && cavityPos.y == downExplosionPos.y && cavityPos.z == downExplosionPos.z && isPreventDown == false)
+			if (cavityPos.x == downExplosionPos.x && cavityPos.y == downExplosionPos.y && cavityPos.z == downExplosionPos.z)
 			{
-				isExplosionSpreadingDown = true;
+				isHitCavityPosDown = true;
 			}
 		}
 
-		//壊せるブロックがあるかをチェックする
+		if (i != 0)
+		{
+			//茶色ブロックにぶつかったかどうか
+			for (auto brownPos : m_bombInfo->GetBrownBlockPositionList())
+			{
+				//ぶつかったらこれ以上広がらないように変数を変更する
+				if (brownPos.x == rightExplosionPos.x && brownPos.y == rightExplosionPos.y && brownPos.z == rightExplosionPos.z)
+				{
+					isHitBrownBlockRight = true;
+				}
+				if (brownPos.x == leftExplosionPos.x && brownPos.y == leftExplosionPos.y && brownPos.z == leftExplosionPos.z)
+				{
+					isHitBrownBlockLeft = true;
+				}
+				if (brownPos.x == upExplosionPos.x && brownPos.y == upExplosionPos.y && brownPos.z == upExplosionPos.z)
+				{
+					isHitBrownBlockUp = true;
+				}
+				if (brownPos.x == downExplosionPos.x && brownPos.y == downExplosionPos.y && brownPos.z == downExplosionPos.z)
+				{
+					isHitBrownBlockDown = true;
+				}
+			}
+		}
+
+		//茶色ブロックがあるかをチェックする
 		for (auto brown : m_bombInfo->GetBrownBlockList())
 		{
-			CheckForBrownBlock(brown, rightExplosionPos);
-			CheckForBrownBlock(brown, leftExplosionPos);
-			CheckForBrownBlock(brown, upExplosionPos);
-			CheckForBrownBlock(brown, downExplosionPos);
+			if (isRightBlockBreak == false && isHitWallBlockRight == false)
+			{
+				CheckForBrownBlock(brown, rightExplosionPos, isRightBlockBreak);
+			}
+			if (isLeftBlockBreak == false && isHitWallBlockLeft == false)
+			{
+				CheckForBrownBlock(brown, leftExplosionPos, isLeftBlockBreak);
+			}
+			if (isUpBlockBreak == false && isHitWallBlockUp == false)
+			{
+				CheckForBrownBlock(brown, upExplosionPos, isUpBlockBreak);
+			}
+			if (isDownBlockBreak == false && isHitWallBlockDown == false)
+			{
+				CheckForBrownBlock(brown, downExplosionPos, isDownBlockBreak);
+			}
 		}
 
 		//爆風を発生させる場所をリストに追加
@@ -224,21 +275,41 @@ void Bomb::Explosion()
 		else
 		{
 			//爆風を広げれるなら座標を追加
-			if (isExplosionSpreadingRight == true)
+			if (((isHitWallBlockRight == false && isHitBrownBlockRight == false) || (isHitWallBlockRight == false && isHitCavityPosRight == true)) && isStopExplosionRight == false)
 			{
 				explosionPosList.emplace_back(rightExplosionPos);
 			}
-			if (isExplosionSpreadingLeft == true)
+			//広げれないなら爆風を止めるフラグを立てる
+			else if (isHitBrownBlockRight == true && isHitCavityPosRight == false)
+			{
+				isStopExplosionRight = true;
+			}
+
+			if (((isHitWallBlockLeft == false && isHitBrownBlockLeft == false) || (isHitWallBlockLeft == false && isHitCavityPosLeft == true)) && isStopExplosionLeft == false)
 			{
 				explosionPosList.emplace_back(leftExplosionPos);
 			}
-			if (isExplosionSpreadingUp == true)
+			else if (isHitBrownBlockLeft == true && isHitCavityPosLeft == false)
+			{
+				isStopExplosionLeft = true;
+			}
+
+			if (((isHitWallBlockUp == false && isHitBrownBlockUp == false) || (isHitWallBlockUp == false && isHitCavityPosUp == true)) && isStopExplosionUp == false)
 			{
 				explosionPosList.emplace_back(upExplosionPos);
 			}
-			if (isExplosionSpreadingDown == true)
+			else if (isHitBrownBlockUp == true && isHitCavityPosUp == false)
+			{
+				isStopExplosionUp = true;
+			}
+
+			if (((isHitWallBlockDown == false && isHitBrownBlockDown == false) || (isHitWallBlockDown == false && isHitCavityPosDown == true)) && isStopExplosionDown == false)
 			{
 				explosionPosList.emplace_back(downExplosionPos);
+			}
+			else if (isHitBrownBlockDown == true && isHitCavityPosDown == false)
+			{
+				isStopExplosionDown = true;
 			}
 		}
 	}
@@ -278,27 +349,36 @@ void Bomb::Explosion()
 	}
 }
 
-void Bomb::CheckForBrownBlock(BrownBlock* brownBlock, Vector3& exPos)
+void Bomb::CheckForBrownBlock(BrownBlock* brownBlock, Vector3& exPos, bool& isBlockBreak)
 {
-	//壊せるブロックがあったら
+	//茶色ブロックがあったら
 	if (brownBlock->GetPosition().x == exPos.x && brownBlock->GetPosition().y == exPos.y && brownBlock->GetPosition().z == exPos.z)
 	{
-		//元々壁判定だった座標を空洞に変更
-		for (auto wallPos : m_bombInfo->GetWallBlockPositionList())
+		//元々壁判定だった茶色ブロックの座標を空洞に変更
+		for (auto brownBlockPos : m_bombInfo->GetBrownBlockPositionList())
 		{
-			if (wallPos.x == brownBlock->GetPosition().x && wallPos.y == brownBlock->GetPosition().y && wallPos.z == brownBlock->GetPosition().z)
+			if (brownBlockPos.x == brownBlock->GetPosition().x && brownBlockPos.y == brownBlock->GetPosition().y && brownBlockPos.z == brownBlock->GetPosition().z)
 			{
 				//空洞リストに追加
-				m_bombInfo->AddCavityPosition(wallPos);
+				m_bombInfo->AddCavityPosition(brownBlockPos);
 
 				//爆弾設置可能リストに追加
-				m_bombInfo->AddBombPoint(wallPos);
+				m_bombInfo->AddBombPoint(brownBlockPos);
 
 				//レベルアップアイテムの設置
-				m_bombInfo->SetLevelUpItem(wallPos);
+				m_bombInfo->SetLevelUpItem(brownBlockPos);
 				
 				//ブロックの削除
 				DeleteGO(brownBlock);
+
+				//ブロック削除済み
+				isBlockBreak = true;
+
+				//エフェクトの再生
+				EffectEmitter* m_effect = NewGO<EffectEmitter>(0);
+				m_effect->Init(enEffectName_BombExplosion);
+				m_effect->SetPosition(brownBlockPos);
+				m_effect->Play();
 			}
 		}
 	}

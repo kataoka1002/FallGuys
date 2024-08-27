@@ -17,7 +17,7 @@ public:
 	void FuseTime();
 	void ResetBomb();
 	void Explosion();
-	void CheckForBrownBlock(BrownBlock* brownBlock, Vector3& exPos);
+	void CheckForBrownBlock(BrownBlock* brownBlock, Vector3& exPos, bool& isBlockBreak);
 
 	void SetBombPosition(Vector3& pos)
 	{

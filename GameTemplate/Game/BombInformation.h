@@ -63,6 +63,11 @@ public:
 		return m_brownBlocks;
 	}
 
+	const std::vector<Vector3>& GetBrownBlockPositionList() const
+	{
+		return m_brownBlockPositionList;
+	}
+
 	/// <summary>
 	/// İ’u‚µ‚Ä‚¢‚é”š’e‚Ì”‚ğŒ¸­‚³‚¹‚é
 	/// </summary>
@@ -105,6 +110,7 @@ private:
 	std::vector<Bomb*> m_bombs4P;
 	std::vector<Vector3> m_bombPoint;
 	std::vector<Vector3> m_wallBlockPositionList;
+	std::vector<Vector3> m_brownBlockPositionList;
 	std::vector<Vector3> m_bombPlantedPosition;
 	std::vector<Vector3> m_cavityPositionList;
 	std::vector<BrownBlock*> m_brownBlocks;

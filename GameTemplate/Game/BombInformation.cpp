@@ -56,11 +56,17 @@ bool BombInformation::Start()
 	//爆弾を置ける場所の取得
 	m_bombPoint = m_stage->GetBombPoint();
 
+	//空洞の場所の取得
+	m_cavityPositionList = m_stage->GetBombPoint();
+
 	//壁になるブロックの座標の取得
 	m_wallBlockPositionList = m_stage->GetWallBlockPositionList();
 
 	//茶色ブロックのリストを取得
 	m_brownBlocks = m_stage->GetBrownBlockList();
+
+	//茶色ブロックの座標リストの取得
+	m_brownBlockPositionList = m_stage->GetBrownBlockPositionList();
 
 	//爆弾のリストを管理する配列
 	//std::vector<std::unique_ptr<Bomb>> bombs[4] = { m_bombs1P ,m_bombs2P ,m_bombs3P ,m_bombs4P };
